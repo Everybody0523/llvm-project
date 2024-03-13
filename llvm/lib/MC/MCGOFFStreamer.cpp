@@ -64,6 +64,16 @@ void MCGOFFStreamer::switchSection(MCSection *S, const MCExpr *Subsection) {
   this->MCObjectStreamer::switchSection(Section, Subsection);
 }
 
+void MCGOFFStreamer::emitLabel(MCSymbol *S, SMLoc Loc) {
+  MCSymbolGOFF *GSymbol = cast<MCSymbolGOFF>(S);
+  const MCAsmInfo *MAI = getContext().getAsmInfo();
+  StringRef Name = GSymbol->getName();
+  if (Name.starts_with(MAI->getPrivateGlobalPrefix()) ||
+      Name.starts_with(MAI->getPrivateLabelPrefix()))
+    GSymbol->setTemporary(true);
+  MCObjectStreamer::emitLabel(GSymbol, Loc);
+}
+
 bool MCGOFFStreamer::emitSymbolAttribute(MCSymbol *S, MCSymbolAttr Attribute) {
   auto *Symbol = cast<MCSymbolGOFF>(S);
 

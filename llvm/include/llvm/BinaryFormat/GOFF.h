@@ -169,6 +169,7 @@ enum ENDEntryPointRequest : uint8_t {
 
 // \brief Subsections of the primary C_CODE section in the object file.
 enum SubsectionKind : uint8_t {
+  SK_ReadOnly = 1,
   SK_PPA1 = 2,
   SK_PPA2 = 4,
 };
