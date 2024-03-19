@@ -29,7 +29,11 @@ public:
 
   void switchSection(MCSection *Section,
                      const MCExpr *Subsection = nullptr) override;
+<<<<<<< HEAD
 
+=======
+  void emitLabel(MCSymbol *S, SMLoc Loc = SMLoc()) override;
+>>>>>>> 8777e0941718b4434c742ed345b6e7b258756153
   bool emitSymbolAttribute(MCSymbol *Symbol, MCSymbolAttr Attribute) override;
   void emitCommonSymbol(MCSymbol *Symbol, uint64_t Size,
                         Align ByteAlignment) override {}
